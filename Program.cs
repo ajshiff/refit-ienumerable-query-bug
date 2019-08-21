@@ -15,13 +15,15 @@ namespace RefitIEnumerableBug
     // The example query object, featuring Enumerable properties
     class MyQuery
     {
-        [AliasAs("ListInts")]
-        public IEnumerable<int> ListOfInts {get; set;}
-        [AliasAs("ListBools")]
-        public IEnumerable<bool> ListOfBools {get; set;}
-        [AliasAs("ListEnums")]
-        public IEnumerable<ExampleEnum> ListOfEnums {get; set;}
-        [AliasAs("ListStrings")]
+        [AliasAs("ListInts[]")]
+        public IEnumerable<int?> ListOfInts {get; set;}
+        [AliasAs("ListBools[]")]
+        public IEnumerable<bool?> ListOfBools {get; set;}
+        [AliasAs("ListEnums[]")]
+        public IEnumerable<ExampleEnum?> ListOfEnums {get; set;}
+
+        // Can't nullable type string: "The feature 'nullable reference types' is currently in Preview and *unsupported*."
+        [AliasAs("ListStrings[]")]
         public IEnumerable<string> ListOfStrings {get; set;}
     }
 
@@ -62,9 +64,9 @@ namespace RefitIEnumerableBug
             int id = 5;
             MyQuery query = new MyQuery() 
             {
-                ListOfInts = new List<int>(){32,42,52},
-                ListOfBools = new List<bool> {true, false},
-                ListOfEnums = new List<ExampleEnum>(){ExampleEnum.Second, ExampleEnum.Third},
+                ListOfInts = new List<int?>(){32,42,52},
+                ListOfBools = new List<bool?> {true, false},
+                ListOfEnums = new List<ExampleEnum?>(){ExampleEnum.Second, ExampleEnum.Third},
                 ListOfStrings = new List<string>(){"Bird", "word"}
             };
             // Make the Call
